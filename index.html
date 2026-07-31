@@ -387,11 +387,18 @@ footer { border-top: 1px solid var(--bg-border); padding: 3.5rem 2rem; text-alig
         </div>
       </div>
       <div>
-        <div class="form-group"><label>Nome completo</label><input type="text" placeholder="Seu nome"></div>
-        <div class="form-group"><label>E-mail</label><input type="email" placeholder="seu@email.com"></div>
-        <div class="form-group"><label>Assunto</label><input type="text" placeholder="Motivo do contato"></div>
-        <div class="form-group"><label>Mensagem</label><textarea placeholder="Escreva sua mensagem..."></textarea></div>
-        <button class="btn-primary" onclick="alert('Mensagem enviada com sucesso!')" style="width:100%">Enviar mensagem</button>
+        <form action="https://formsubmit.co/jefersonmelorocha@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Contato pelo site — Loja UHF 3582">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://uhf3582.com.br/?enviado=1">
+          <input type="text" name="_honey" style="display:none">
+          <div class="form-group"><label>Nome completo</label><input type="text" name="nome" placeholder="Seu nome" required></div>
+          <div class="form-group"><label>E-mail</label><input type="email" name="email" placeholder="seu@email.com" required></div>
+          <div class="form-group"><label>Assunto</label><input type="text" name="assunto" placeholder="Motivo do contato" required></div>
+          <div class="form-group"><label>Mensagem</label><textarea name="mensagem" placeholder="Escreva sua mensagem..." required></textarea></div>
+          <button class="btn-primary" type="submit" style="width:100%">Enviar mensagem</button>
+        </form>
       </div>
     </div>
   </div>
@@ -521,6 +528,12 @@ function showPage(id) {
   const nav = document.getElementById('nav-' + id);
   if (nav) nav.classList.add('active-link');
   window.scrollTo(0, 0);
+}
+if (new URLSearchParams(window.location.search).get('enviado') === '1') {
+  window.addEventListener('load', function() {
+    alert('Mensagem enviada com sucesso! A Loja agradece o seu contato.');
+    history.replaceState(null, '', window.location.pathname);
+  });
 }
 </script>
 
