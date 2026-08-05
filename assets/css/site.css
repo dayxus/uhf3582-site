@@ -147,12 +147,12 @@ button, .button { min-height: 44px; }
   mask-image: linear-gradient(to right, transparent, #000 38%, #000);
 }
 .hero-inner {
-  min-height: 720px;
+  min-height: 620px;
   display: grid;
-  grid-template-columns: minmax(0, 1.16fr) minmax(320px, 0.84fr);
-  align-items: center;
-  gap: clamp(3rem, 8vw, 8rem);
+  grid-template-columns: 1fr;
+  place-items: center;
   padding-block: 5rem;
+  text-align: center;
 }
 .eyebrow {
   margin: 0 0 1.25rem;
@@ -169,17 +169,17 @@ button, .button { min-height: 44px; }
   line-height: 1.06;
   text-wrap: balance;
 }
-.hero h1 { max-width: 760px; font-size: clamp(3rem, 6.5vw, 6.2rem); }
+.hero h1 { max-width: 920px; margin-inline: auto; font-size: clamp(3rem, 6.5vw, 6.2rem); }
 .hero h1 em { display: block; color: var(--gold-300); font-weight: 400; }
 .hero-lead {
-  max-width: 680px;
-  margin: 1.7rem 0 0;
+  max-width: 720px;
+  margin: 1.7rem auto 0;
   color: var(--ivory-200);
   font-family: var(--display);
   font-size: clamp(1.15rem, 2vw, 1.45rem);
   line-height: 1.65;
 }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2.25rem; }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.85rem; margin-top: 2.25rem; }
 .button {
   display: inline-flex;
   align-items: center;
@@ -198,21 +198,6 @@ button, .button { min-height: 44px; }
 .button:hover { transform: translateY(-2px); background: var(--gold-300); }
 .button.secondary { background: transparent; color: var(--gold-300); }
 .button.secondary:hover { background: rgba(213,175,71,.1); }
-.emblem-stage { position: relative; display: grid; place-items: center; min-height: 480px; }
-.emblem-stage::before, .emblem-stage::after {
-  content: '';
-  position: absolute;
-  border: 1px solid rgba(213,175,71,.19);
-  border-radius: 50%;
-}
-.emblem-stage::before { width: min(39vw, 480px); aspect-ratio: 1; }
-.emblem-stage::after { width: min(34vw, 410px); aspect-ratio: 1; border-style: dashed; }
-.emblem-stage img {
-  position: relative;
-  z-index: 1;
-  width: min(30vw, 360px);
-  filter: drop-shadow(0 26px 48px rgba(0,0,0,.42));
-}
 
 .credentials { border-block: 1px solid var(--line); background: var(--navy-900); }
 .credentials-inner {
@@ -361,12 +346,8 @@ button, .button { min-height: 44px; }
   .site-nav a { padding: .9rem .25rem; }
   .site-nav a[aria-current='page']::after { display: none; }
   .site-nav .portal-link { margin-top: .45rem; text-align: center; }
-  .hero-inner { min-height: auto; grid-template-columns: 1fr; gap: 1.5rem; padding-block: 4rem; }
+  .hero-inner { min-height: auto; grid-template-columns: 1fr; padding-block: 4rem; }
   .hero h1 { font-size: clamp(2.8rem, 14vw, 5.2rem); }
-  .emblem-stage { min-height: 360px; order: -1; }
-  .emblem-stage::before { width: 330px; }
-  .emblem-stage::after { width: 286px; }
-  .emblem-stage img { width: 250px; }
   .credentials-inner, .principles, .facts { grid-template-columns: 1fr; }
   .credential, .principle, .fact { border-right: 0; border-bottom: 1px solid var(--line); }
   .credential:last-child, .principle:last-child, .fact:last-child { border-bottom: 0; }
@@ -384,10 +365,6 @@ button, .button { min-height: 44px; }
   .brand-mark span { display: none; }
   .hero-actions { display: grid; }
   .button { width: 100%; }
-  .emblem-stage { min-height: 300px; }
-  .emblem-stage::before { width: 280px; }
-  .emblem-stage::after { width: 242px; }
-  .emblem-stage img { width: 210px; }
   .institutional-list div { grid-template-columns: 1fr; gap: .3rem; }
   .institutional-list dd { text-align: left; }
 }
