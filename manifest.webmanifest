@@ -1,0 +1,17 @@
+{
+  "name": "Loja União, Harmonia e Fraternidade Nº 3582",
+  "short_name": "UHF 3582",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050d24",
+  "theme_color": "#050d24",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "/assets/img/logo-uhf3582.webp",
+      "sizes": "720x720",
+      "type": "image/webp",
+      "purpose": "any"
+    }
+  ]
+}

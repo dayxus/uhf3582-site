@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://uhf3582.com.br/sitemap.xml
