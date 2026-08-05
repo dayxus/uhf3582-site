@@ -1,541 +1,121 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loja União, Harmonia e Fraternidade Nº 3582</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --royal: #0D1F5C;
-  --royal-deep: #07112E;
-  --royal-mid: #162450;
-  --gold: #C9A84C;
-  --gold-light: #F0D060;
-  --gold-dim: #8B6914;
-  --gold-pale: #E8CC7A;
-  --silver: #C8C8D4;
-  --text-primary: #F5EDD0;
-  --text-secondary: #A89860;
-  --text-dim: #4A4030;
-  --bg-card: #0A1535;
-  --bg-surface: #111A3A;
-  --bg-border: #1E2D5A;
-  --font-d: 'Cinzel', serif;
-  --font-b: 'Cormorant Garamond', serif;
-}
-html { scroll-behavior: smooth; }
-body { background: var(--royal-deep); color: var(--text-primary); font-family: var(--font-b); font-size: 20px; line-height: 1.8; min-height: 100vh; }
-
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(7,17,46,0.97);
-  border-bottom: 1px solid var(--bg-border);
-  backdrop-filter: blur(14px);
-  padding: 0 2rem;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 66px;
-}
-.nav-brand { font-family: var(--font-d); font-size: 13px; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; cursor: pointer; display: flex; align-items: center; gap: 10px; }
-.nav-emblem { width: 32px; height: 32px; }
-.nav-links { display: flex; gap: 2rem; list-style: none; }
-.nav-links a { font-family: var(--font-d); font-size: 11px; letter-spacing: 0.18em; color: var(--text-secondary); text-decoration: none; text-transform: uppercase; transition: color 0.3s; cursor: pointer; }
-.nav-links a:hover, .nav-links a.active-link { color: var(--gold); }
-.nav-badge { font-family: var(--font-d); font-size: 9px; background: var(--gold); color: var(--royal-deep); padding: 2px 7px; letter-spacing: 0.1em; margin-left: 6px; }
-
-.page { display: none; animation: fadeIn 0.5s ease; }
-.page.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.hero {
-  min-height: 92vh;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; padding: 3rem 2rem;
-  position: relative; overflow: hidden;
-  background: radial-gradient(ellipse 80% 60% at 50% 35%, rgba(22,36,80,0.9) 0%, var(--royal-deep) 70%);
-}
-.hero::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse 50% 40% at 50% 30%, rgba(201,168,76,0.07) 0%, transparent 65%);
-  pointer-events: none;
-}
-.hero::after {
-  content: ''; position: absolute; inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 15% 20%, rgba(201,168,76,0.4) 0%, transparent 100%),
-    radial-gradient(1px 1px at 80% 15%, rgba(201,168,76,0.3) 0%, transparent 100%),
-    radial-gradient(1px 1px at 60% 70%, rgba(201,168,76,0.2) 0%, transparent 100%),
-    radial-gradient(1px 1px at 25% 75%, rgba(201,168,76,0.25) 0%, transparent 100%),
-    radial-gradient(1px 1px at 90% 55%, rgba(201,168,76,0.2) 0%, transparent 100%);
-  pointer-events: none;
-}
-
-.hero-eyebrow { font-family: var(--font-d); font-size: 11px; letter-spacing: 0.38em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.5rem; position: relative; z-index: 1; }
-
-.hero-logo-wrap {
-  position: relative; z-index: 1;
-  width: 320px; height: 320px;
-  margin: 0 auto 2rem;
-  border-radius: 50%;
-  border: 2px solid rgba(201,168,76,0.3);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-  box-shadow: 0 0 60px rgba(201,168,76,0.15), 0 0 120px rgba(13,31,92,0.6);
-  animation: logoGlow 5s ease-in-out infinite;
-}
-@keyframes logoGlow {
-  0%,100% { box-shadow: 0 0 40px rgba(201,168,76,0.12), 0 0 80px rgba(13,31,92,0.5); }
-  50% { box-shadow: 0 0 70px rgba(201,168,76,0.28), 0 0 140px rgba(13,31,92,0.7); }
-}
-.hero-logo-wrap img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-
-.hero-title { font-family: var(--font-d); font-size: clamp(26px, 3.5vw, 48px); font-weight: 700; line-height: 1.2; color: var(--text-primary); margin-bottom: 0.4rem; letter-spacing: 0.05em; position: relative; z-index: 1; }
-.hero-subtitle { font-family: var(--font-d); font-size: 13px; letter-spacing: 0.28em; color: var(--gold-pale); margin-bottom: 0.4rem; text-transform: uppercase; position: relative; z-index: 1; }
-.hero-number { font-family: var(--font-d); font-size: 14px; letter-spacing: 0.3em; color: var(--text-secondary); margin-bottom: 1.8rem; position: relative; z-index: 1; }
-.hero-ornament { display: flex; align-items: center; gap: 1rem; justify-content: center; margin-bottom: 1.8rem; position: relative; z-index: 1; }
-.hero-ornament-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
-.hero-ornament-line.r { background: linear-gradient(90deg, var(--gold), transparent); }
-.hero-ornament-diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); }
-.hero-tagline { font-family: var(--font-b); font-style: italic; font-size: 20px; color: #D4C89A; max-width: 480px; line-height: 1.9; margin-bottom: 2.5rem; position: relative; z-index: 1; }
-.hero-badges { display: flex; gap: 1rem; justify-content: center; margin-bottom: 2.5rem; flex-wrap: wrap; position: relative; z-index: 1; }
-.badge { font-family: var(--font-d); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; border: 1px solid var(--gold-dim); color: var(--gold-pale); padding: 6px 16px; }
-.hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; position: relative; z-index: 1; }
-
-.btn-primary { font-family: var(--font-d); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; background: var(--gold-light); color: #100E00; border: none; padding: 14px 34px; cursor: pointer; transition: all 0.3s; font-weight: 700; }
-.btn-primary:hover { background: #F8DC88; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
-.btn-outline { font-family: var(--font-d); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; background: rgba(201,168,76,0.08); color: var(--gold-light); border: 1px solid var(--gold); padding: 14px 34px; cursor: pointer; transition: all 0.3s; font-weight: 600; }
-.btn-outline:hover { background: rgba(201,168,76,0.18); transform: translateY(-2px); }
-
-.pillars { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--bg-border); border-top: 1px solid var(--bg-border); border-bottom: 1px solid var(--bg-border); }
-.pillar { background: var(--bg-card); padding: 3rem 2rem; text-align: center; position: relative; }
-.pillar::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 40px; height: 2px; background: var(--gold); }
-.pillar-symbol { font-size: 32px; margin-bottom: 1.2rem; color: var(--gold); font-family: var(--font-d); font-weight: 700; }
-.pillar-title { font-family: var(--font-d); font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
-.pillar-text { font-size: 16px; color: var(--text-primary); line-height: 1.8; opacity: 0.82; }
-
-.section { padding: 5rem 2rem; max-width: 920px; margin: 0 auto; }
-.section-label { font-family: var(--font-d); font-size: 10px; letter-spacing: 0.45em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.8rem; }
-.section-title { font-family: var(--font-d); font-size: clamp(22px, 3vw, 38px); font-weight: 700; color: var(--text-primary); margin-bottom: 1.5rem; line-height: 1.25; }
-.section-divider { width: 48px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; }
-.section-body { font-size: 20px; color: var(--text-primary); line-height: 1.95; opacity: 0.88; }
-.section-body p + p { margin-top: 1.4rem; }
-
-.sobre-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
-.info-card { background: var(--bg-card); border: 1px solid var(--bg-border); border-top: 2px solid var(--gold); padding: 2rem; margin-top: 1.5rem; }
-.info-card h4 { font-family: var(--font-d); font-size: 10px; letter-spacing: 0.25em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.2rem; }
-.info-row { display: flex; justify-content: space-between; align-items: baseline; padding: 0.65rem 0; border-bottom: 1px solid var(--bg-border); font-size: 15px; }
-.info-row:last-child { border-bottom: none; }
-.info-label { color: #9A8C6E; font-family: var(--font-d); font-size: 11px; letter-spacing: 0.1em; }
-.info-value { color: var(--text-primary); font-weight: 600; }
-
-.contato-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; }
-.contact-block { margin-bottom: 2.2rem; }
-.contact-block h4 { font-family: var(--font-d); font-size: 10px; letter-spacing: 0.22em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.6rem; }
-.contact-block p { font-size: 16px; color: var(--text-primary); opacity: 0.85; }
-.form-group { margin-bottom: 1.5rem; }
-.form-group label { display: block; font-family: var(--font-d); font-size: 10px; letter-spacing: 0.2em; color: #B09A5A; text-transform: uppercase; margin-bottom: 0.5rem; }
-.form-group input, .form-group textarea { width: 100%; background: var(--bg-surface); border: 1px solid var(--bg-border); border-bottom: 1px solid var(--gold-dim); color: var(--text-primary); font-family: var(--font-b); font-size: 17px; padding: 12px 16px; outline: none; transition: border-color 0.3s; resize: vertical; }
-.form-group input:focus, .form-group textarea:focus { border-bottom-color: var(--gold); }
-.form-group textarea { min-height: 130px; }
-
-.login-wrap { min-height: 72vh; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem; }
-.login-card { background: var(--bg-card); border: 1px solid var(--bg-border); border-top: 2px solid var(--gold); padding: 3rem; width: 100%; max-width: 460px; text-align: center; }
-.login-emblem { width: 80px; height: 80px; margin: 0 auto 1.5rem; }
-.login-title { font-family: var(--font-d); font-size: 20px; letter-spacing: 0.12em; color: var(--text-primary); margin-bottom: 0.4rem; }
-.login-sub { font-size: 14px; color: #9A8C6E; margin-bottom: 2.5rem; font-style: italic; }
-
-.member-dashboard { padding: 2rem; max-width: 920px; margin: 0 auto; display: none; }
-.dash-header { display: flex; justify-content: space-between; align-items: center; padding-bottom: 1.5rem; border-bottom: 1px solid var(--bg-border); margin-bottom: 2.5rem; }
-.dash-welcome { font-family: var(--font-d); font-size: 14px; letter-spacing: 0.12em; color: var(--gold); }
-.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.dash-card { background: var(--bg-card); border: 1px solid var(--bg-border); border-top: 2px solid var(--gold-dim); padding: 1.5rem; }
-.dash-card h4 { font-family: var(--font-d); font-size: 10px; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--bg-border); }
-.event-item { padding: 0.75rem 0; border-bottom: 1px solid var(--bg-border); }
-.event-item:last-child { border-bottom: none; }
-.event-date { color: #C9A84C; font-size: 12px; font-family: var(--font-d); letter-spacing: 0.12em; }
-.event-name { color: var(--text-primary); font-size: 15px; margin-top: 3px; opacity: 0.88; }
-.doc-item { display: flex; align-items: center; gap: 10px; padding: 0.65rem 0; border-bottom: 1px solid var(--bg-border); font-size: 14px; color: var(--text-primary); opacity: 0.85; cursor: pointer; transition: color 0.25s; }
-.doc-item:last-child { border-bottom: none; }
-.doc-item:hover { color: var(--gold); }
-.doc-icon { color: var(--gold-dim); }
-.mural-item { padding: 0.8rem 0; border-bottom: 1px solid var(--bg-border); font-size: 15px; color: var(--text-primary); }
-.mural-item:last-child { border-bottom: none; }
-.mural-tag { display: inline-block; font-family: var(--font-d); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; padding: 2px 9px; border: 1px solid var(--gold-dim); color: var(--gold-dim); margin-right: 8px; vertical-align: middle; }
-.mural-tag.urg { border-color: #C45; color: #E87; }
-
-footer { border-top: 1px solid var(--bg-border); padding: 3.5rem 2rem; text-align: center; background: var(--royal-deep); }
-.footer-logo { width: 56px; height: 56px; margin: 0 auto 1.2rem; border-radius: 50%; border: 1px solid var(--bg-border); overflow: hidden; }
-.footer-logo img { width: 100%; height: 100%; object-fit: cover; }
-.footer-brand { font-family: var(--font-d); font-size: 13px; letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.4rem; }
-.footer-sub { font-size: 14px; color: #9A8C6E; font-style: italic; }
-.footer-ornament { display: flex; align-items: center; gap: 1rem; justify-content: center; margin: 1.5rem auto; max-width: 300px; }
-.footer-ornament-line { flex: 1; height: 1px; background: var(--bg-border); }
-.footer-diamond { width: 5px; height: 5px; background: var(--gold-dim); transform: rotate(45deg); }
-.footer-copy { font-size: 13px; color: #9A8C6E; }
-
-@media (max-width: 720px) {
-  .pillars { grid-template-columns: 1fr; }
-  .sobre-grid, .contato-grid, .dash-grid { grid-template-columns: 1fr; gap: 2rem; }
-  nav { padding: 0 1rem; }
-  .nav-links { gap: 1rem; }
-  .hero-logo-wrap { width: 240px; height: 240px; }
-}
-
-  /* ── COOKIE BANNER ── */
-  #cookie-banner {
-    position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
-    background: #07112E;
-    border-top: 1px solid var(--bg-border);
-    padding: 1.2rem 2rem;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 1.5rem; flex-wrap: wrap;
-    box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
-    animation: slideUp 0.5s ease;
-  }
-  @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-  .cookie-text { font-family: var(--font-b); font-size: 15px; color: var(--text-secondary); flex: 1; min-width: 260px; line-height: 1.6; }
-  .cookie-text a { color: var(--gold); text-decoration: underline; cursor: pointer; }
-  .cookie-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  .btn-cookie-accept { font-family: var(--font-d); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--gold-light); color: #100E00; border: none; padding: 10px 24px; cursor: pointer; font-weight: 700; transition: all 0.3s; }
-  .btn-cookie-accept:hover { background: #F8DC88; }
-  .btn-cookie-reject { font-family: var(--font-d); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; background: transparent; color: var(--text-dim); border: 1px solid var(--bg-border); padding: 10px 24px; cursor: pointer; transition: all 0.3s; }
-  .btn-cookie-reject:hover { border-color: var(--gold-dim); color: var(--text-secondary); }
-
-  /* ── POLÍTICA PAGE ── */
-  .politica-content { max-width: 820px; margin: 0 auto; padding: 5rem 2rem; }
-  .politica-content h2 { font-family: var(--font-d); font-size: clamp(20px,3vw,34px); font-weight:700; color: var(--text-primary); margin-bottom: 1rem; line-height:1.3; }
-  .politica-content h3 { font-family: var(--font-d); font-size: 14px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin: 2.5rem 0 0.75rem; }
-  .politica-content p { font-size: 17px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 1rem; }
-  .politica-content ul { padding-left: 1.5rem; margin-bottom: 1rem; }
-  .politica-content ul li { font-size: 16px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 0.4rem; }
-  .politica-content .politica-date { font-family: var(--font-d); font-size: 10px; letter-spacing: 0.3em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 2.5rem; }
-  .politica-divider { width: 48px; height: 2px; background: var(--gold); margin-bottom: 2.5rem; }
-
-
-  /* ── DASHBOARD TABS ── */
-  .dash-tab { animation: fadeIn 0.3s ease; }
-  .tab-nav-btn {
-    font-family: var(--font-d); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
-    background: rgba(201,168,76,0.05); color: var(--text-secondary);
-    border: 1px solid var(--bg-border); padding: 7px 14px; cursor: pointer; transition: all 0.25s;
-  }
-  .tab-nav-btn:hover { color: var(--gold); border-color: var(--gold-dim); }
-  .tab-nav-btn.active-tab { background: rgba(201,168,76,0.15); color: var(--gold); border-color: var(--gold); }
-  .adm-tab-btn {
-    font-family: var(--font-d); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
-    background: var(--bg-card); color: var(--text-secondary);
-    border: 1px solid var(--bg-border); padding: 7px 14px; cursor: pointer; transition: all 0.25s;
-  }
-  .adm-tab-btn:hover { color: var(--gold); border-color: var(--gold-dim); }
-  .adm-tab-btn.adm-active { background: rgba(201,168,76,0.1); color: var(--gold); border-color: var(--gold); }
-  /* Reunion card */
-  .reun-card { background:var(--bg-card); border:1px solid var(--bg-border); border-left:3px solid var(--gold); padding:1rem 1.5rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; }
-  .reun-date { font-family:var(--font-d); font-size:12.6px; letter-spacing:0.12em; color:#C9A84C; margin-bottom:3px; }
-  .reun-name { font-size:17.2px; color:var(--text-secondary); }
-  /* Doc card */
-  .doc-card { background:var(--bg-card); border:1px solid var(--bg-border); padding:1rem 1.5rem; display:flex; align-items:center; gap:1rem; cursor:pointer; transition:border-color 0.2s; }
-  .doc-card:hover { border-color:var(--gold-dim); }
-  .doc-card span[style*="color:var(--text-secondary)"] { color: #E0D4B0 !important; }
-  /* Aviso card */
-  .aviso-card { background:var(--bg-card); border:1px solid var(--bg-border); padding:1rem 1.5rem; display:flex; align-items:flex-start; gap:1rem; }
-  .aviso-tag-badge { font-family:var(--font-d); font-size:10.3px; letter-spacing:0.12em; text-transform:uppercase; padding:2px 8px; border:1px solid var(--gold-dim); color:var(--gold-dim); white-space:nowrap; margin-top:3px; }
-  .aviso-tag-badge.urg { border-color:#C45; color:#E87; }
-  /* Member card */
-  .member-card { background:var(--bg-card); border:1px solid var(--bg-border); padding:1rem 1.5rem; display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap; }
-  .btn-action { font-family:var(--font-d); font-size:10.3px; letter-spacing:0.1em; text-transform:uppercase; background:none; border:1px solid var(--bg-border); color:var(--text-dim); padding:4px 10px; cursor:pointer; transition:all 0.2s; }
-  .btn-action:hover { border-color:var(--gold-dim); color:var(--gold-dim); }
-  .btn-action.danger { border-color:#922; color:#C45; }
-  .btn-action.danger:hover { background:rgba(204,68,68,0.1); }
-  .empty-state { color:#9A8C6E; font-style:italic; font-size:17.2px; padding:2rem 0; text-align:center; }
-
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loja Maçônica União, Harmonia e Fraternidade Nº 3582</title>
+  <meta name="description" content="Site institucional da Loja Maçônica União, Harmonia e Fraternidade Nº 3582, no Oriente de São Paulo, federada ao GOB e filiada ao GOB-SP.">
+  <meta name="theme-color" content="#050d24">
+  <link rel="canonical" href="https://uhf3582.com.br/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta property="og:title" content="União, Harmonia e Fraternidade Nº 3582">
+  <meta property="og:description" content="Mais de duas décadas de estudo, fraternidade e aperfeiçoamento no Oriente de São Paulo.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://uhf3582.com.br/">
+  <meta property="og:image" content="https://uhf3582.com.br/assets/img/logo-uhf3582.webp">
+  <meta property="og:locale" content="pt_BR">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <script src="/assets/js/site.js" defer></script>
 </head>
-<body>
+<body itemscope itemtype="https://schema.org/Organization">
+  <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="/" aria-label="UHF 3582 — página inicial" itemprop="url">
+        <img src="/assets/img/logo-uhf3582.webp" width="38" height="38" alt="" itemprop="logo">
+        <span class="brand-mark"><strong>UHF · 3582</strong><span>Oriente de São Paulo</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      <nav class="site-nav" id="menu-principal" aria-label="Principal" data-open="false">
+        <a href="/" aria-current="page">Início</a>
+        <a href="/a-loja/">A Loja</a>
+        <a href="/contato/">Contato</a>
+        <a class="portal-link" href="https://gestao.uhf3582.com.br/">Área dos Irmãos</a>
+      </nav>
+    </div>
+  </header>
 
-<nav>
-  <div class="nav-brand" onclick="showPage('home')">
-    UHF · 3582
-  </div>
-  <ul class="nav-links">
-    <li><a onclick="showPage('home')" id="nav-home" class="active-link">Início</a></li>
-    <li><a onclick="showPage('sobre')" id="nav-sobre">A Loja</a></li>
-    <li><a onclick="showPage('contato')" id="nav-contato">Contato</a></li>
-    <li><a href="https://gestao.uhf3582.com.br/" id="nav-membros" style="background:var(--gold);color:#100E00;padding:6px 16px;font-weight:700;">Irmãos</a></li>
-  </ul>
-</nav>
-
-<!-- HOME -->
-<div id="page-home" class="page active">
-  <section class="hero">
-    <p class="hero-eyebrow">À Glória do Grande Arquiteto do Universo</p>
-    <div class="hero-logo-wrap">
-      <!-- Substitua o src abaixo pelo caminho real do logo no seu servidor -->
-      <img src="logo.png" alt="Logo Loja UHF 3582"/>
-    </div>
-    <p class="hero-subtitle">Augusta e Respeitável Loja Simbólica</p>
-    <h1 class="hero-title">União, Harmonia<br>e Fraternidade</h1>
-    <p class="hero-number">Loja Nº 3582</p>
-    <div class="hero-ornament">
-      <div class="hero-ornament-line"></div>
-      <div class="hero-ornament-diamond"></div>
-      <div class="hero-ornament-line r"></div>
-    </div>
-    <p class="hero-tagline">«Construindo homens melhores,<br>edificando uma sociedade mais justa.»</p>
-    <div class="hero-badges">
-      <div class="badge">Federada ao GOB</div>
-      <div class="badge">Filiada ao GOB-SP</div>
-    </div>
-    <div class="hero-cta">
-      <button class="btn-primary" onclick="window.location.href='https://gestao.uhf3582.com.br/'">Área dos Irmãos</button>
-    </div>
-  </section>
-
-  <div class="pillars">
-    <div class="pillar">
-      <div class="pillar-symbol">L</div>
-      <div class="pillar-title">Liberdade</div>
-      <p class="pillar-text">O livre-arbítrio como alicerce do aperfeiçoamento humano e da busca constante pela verdade.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-symbol">I</div>
-      <div class="pillar-title">Igualdade</div>
-      <p class="pillar-text">Todos os homens são iguais perante o Grande Arquiteto do Universo, sem distinção.</p>
-    </div>
-    <div class="pillar">
-      <div class="pillar-symbol">F</div>
-      <div class="pillar-title">Fraternidade</div>
-      <p class="pillar-text">O laço inquebrável que une os irmãos na jornada de construção do espírito e da virtude.</p>
-    </div>
-  </div>
-
-  <div class="section">
-    <p class="section-label">Nossa missão</p>
-    <h2 class="section-title">Lapidar a pedra bruta,<br>revelar o ouro interior</h2>
-    <div class="section-divider"></div>
-    <div class="section-body">
-      <p>A Loja Maçônica União, Harmonia e Fraternidade Nº 3582 reúne homens livres e de bons costumes que buscam, através dos rituais e do estudo filosófico, o constante aperfeiçoamento moral e intelectual.</p>
-      <p>Desde a nossa fundação em 07 de março de 2004, no Oriente de São Paulo, mantemos vivo o compromisso com os princípios que norteiam a Maçonaria: o amor à virtude, o respeito ao próximo e a dedicação ao bem da humanidade.</p>
-    </div>
-  </div>
-
-  <footer>
-    <div class="footer-logo"><img src="logo.png" alt="logo"/></div>
-    <div class="footer-brand">União, Harmonia e Fraternidade · 3582</div>
-    <div class="footer-sub">Oriente de São Paulo · Federada ao GOB · Fundada em 7 de Março de 2004</div>
-    <div class="footer-ornament"><div class="footer-ornament-line"></div><div class="footer-diamond"></div><div class="footer-ornament-line"></div></div>
-    <div class="footer-copy">© 2026 · Todos os direitos reservados &nbsp;·&nbsp; <a onclick="showPage('politica')" style="color:var(--gold-dim);text-decoration:none;cursor:pointer;font-family:var(--font-d);font-size:12.6px;letter-spacing:0.1em;">Política de Cookies</a></div>
-  </footer>
-</div>
-
-<!-- SOBRE -->
-<div id="page-sobre" class="page">
-  <div class="section">
-    <p class="section-label">A Loja</p>
-    <h2 class="section-title">Mais de vinte anos<br>edificando no Oriente de São Paulo</h2>
-    <div class="section-divider"></div>
-    <div class="sobre-grid">
-      <div class="section-body">
-        <p>Fundada em 07 de março de 2004 no Oriente de São Paulo, a Augusta e Respeitável Loja Simbólica União, Harmonia e Fraternidade Nº 3582 tem sido, ao longo de mais de duas décadas, um espaço sagrado de reflexão filosófica, estudo e fraternidade entre homens livres e de bons costumes.</p>
-        <p>Nossos trabalhos são conduzidos segundo o Rito Adonhiramita, seguindo os ensinamentos e a tradição que nos foram transmitidos pelos grandes construtores da história da Maçonaria universal.</p>
-        <p>A Loja se reúne todas as terças-feiras — com exceção da última do mês — no Templo, onde os Irmãos, em postos e graus, constroem juntos o edifício invisível do conhecimento, da virtude e da fraternidade, sempre sob o olhar do Grande Arquiteto do Universo.</p>
-      </div>
-      <div>
-        <div class="info-card">
-          <h4>Informações institucionais</h4>
-          <div class="info-row"><span class="info-label">Número</span><span class="info-value">3582</span></div>
-          <div class="info-row"><span class="info-label">Rito</span><span class="info-value">Adonhiramita</span></div>
-          <div class="info-row"><span class="info-label">Oriente</span><span class="info-value">São Paulo – SP</span></div>
-          <div class="info-row"><span class="info-label">Fundação</span><span class="info-value">07/03/2004</span></div>
-          <div class="info-row"><span class="info-label">Reuniões</span><span class="info-value">Todas as terças-feiras, exceto a última do mês</span></div>
-          <div class="info-row"><span class="info-label">Federação</span><span class="info-value">GOB</span></div>
-          <div class="info-row"><span class="info-label">Filiação</span><span class="info-value">GOB-SP</span></div>
+  <main id="conteudo">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <p class="eyebrow">À Glória do Grande Arquiteto do Universo</p>
+          <h1 itemprop="name">União, Harmonia <em>e Fraternidade</em></h1>
+          <p class="hero-lead">Uma Loja dedicada ao aperfeiçoamento moral e intelectual, à reflexão filosófica e à construção de uma sociedade mais justa.</p>
+          <div class="hero-actions">
+            <a class="button" href="/a-loja/">Conheça nossa história</a>
+            <a class="button secondary" href="https://gestao.uhf3582.com.br/">Acessar portal dos Irmãos</a>
+          </div>
         </div>
-        <div class="info-card">
-          <h4>Administração 2026</h4>
-          <div class="info-row"><span class="info-label">Venerável Mestre</span><span class="info-value">Nilo Procópio Peçanha</span></div>
-          <div class="info-row"><span class="info-label">1º Vigilante</span><span class="info-value">Antoine Lavoisier</span></div>
-          <div class="info-row"><span class="info-label">2º Vigilante</span><span class="info-value">Bezerra de Menezes</span></div>
-          <div class="info-row"><span class="info-label">Orador</span><span class="info-value">Alan Kardec</span></div>
-          <div class="info-row"><span class="info-label">Secretário</span><span class="info-value">Ibrain Nobre</span></div>
+        <div class="emblem-stage" role="img" aria-label="Brasão da Loja UHF 3582">
+          <img src="/assets/img/logo-uhf3582.webp" width="720" height="720" alt="Brasão da Loja União, Harmonia e Fraternidade Nº 3582">
         </div>
       </div>
-    </div>
-  </div>
-  <footer>
-    <div class="footer-logo"><img src="logo.png" alt="logo"/></div>
-    <div class="footer-brand">União, Harmonia e Fraternidade · 3582</div>
-    <div class="footer-sub">Oriente de São Paulo · Federada ao GOB · Fundada em 7 de Março de 2004</div>
-    <div class="footer-ornament"><div class="footer-ornament-line"></div><div class="footer-diamond"></div><div class="footer-ornament-line"></div></div>
-    <div class="footer-copy">© 2026 · Todos os direitos reservados &nbsp;·&nbsp; <a onclick="showPage('politica')" style="color:var(--gold-dim);text-decoration:none;cursor:pointer;font-family:var(--font-d);font-size:12.6px;letter-spacing:0.1em;">Política de Cookies</a></div>
-  </footer>
-</div>
+    </section>
 
-<!-- CONTATO -->
-<div id="page-contato" class="page">
-  <div class="section">
-    <p class="section-label">Contato</p>
-    <h2 class="section-title">Entre em contato<br>com a Loja</h2>
-    <div class="section-divider"></div>
-    <div class="contato-grid">
-      <div>
-        <div class="contact-block"><h4>Endereço do Templo</h4><p>Rua Eduardo Ferreira de França, 364<br>Cursino — São Paulo – SP<br>CEP 04157-000</p></div>
-        <div class="contact-block"><h4>Reuniões</h4><p>Todas as terças-feiras, exceto a última do mês.<br>Consulte o calendário no portal de gestão.</p></div>
-        <div style="padding:1.5rem; background:var(--bg-card); border:1px solid var(--bg-border); border-left:2px solid var(--gold-dim); margin-top:1.5rem">
-          <h4 style="font-family:var(--font-d); font-size:11.5px; letter-spacing:0.2em; color:var(--gold); text-transform:uppercase; margin-bottom:.75rem">Nota importante</h4>
-          <p style="font-size:17.2px; font-style:italic; color:#C8B87A; line-height:1.8;">A Maçonaria não recruta membros. Se você deseja conhecer a Loja, aguardamos sua iniciativa com fraternidade e boa-fé.</p>
+    <section class="credentials" aria-label="Informações institucionais resumidas">
+      <div class="container credentials-inner">
+        <div class="credential"><small>Fundada em</small><strong>7 de março de 2004</strong></div>
+        <div class="credential"><small>Federada ao</small><strong>Grande Oriente do Brasil</strong></div>
+        <div class="credential"><small>Filiada ao</small><strong>GOB-SP</strong></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Princípios que nos orientam</p>
+          <h2>Valores cultivados em cada trabalho</h2>
+          <p>A construção individual ganha sentido quando se transforma em respeito, responsabilidade e fraternidade na vida em sociedade.</p>
+        </div>
+        <div class="principles">
+          <article class="principle"><span class="principle-index">L</span><h3>Liberdade</h3><p>O livre-arbítrio como alicerce do aperfeiçoamento humano e da busca constante pela verdade.</p></article>
+          <article class="principle"><span class="principle-index">I</span><h3>Igualdade</h3><p>O reconhecimento da dignidade de todos, sem distinção, perante o Grande Arquiteto do Universo.</p></article>
+          <article class="principle"><span class="principle-index">F</span><h3>Fraternidade</h3><p>O laço que une os Irmãos na jornada de construção do espírito, do conhecimento e da virtude.</p></article>
         </div>
       </div>
-      <div>
-        <form action="https://formsubmit.co/jefersonmelorocha@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Contato pelo site — Loja UHF 3582">
-          <input type="hidden" name="_captcha" value="false">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_next" value="https://uhf3582.com.br/?enviado=1">
-          <input type="text" name="_honey" style="display:none">
-          <div class="form-group"><label>Nome completo</label><input type="text" name="nome" placeholder="Seu nome" required></div>
-          <div class="form-group"><label>E-mail</label><input type="email" name="email" placeholder="seu@email.com" required></div>
-          <div class="form-group"><label>Assunto</label><input type="text" name="assunto" placeholder="Motivo do contato" required></div>
-          <div class="form-group"><label>Mensagem</label><textarea name="mensagem" placeholder="Escreva sua mensagem..." required></textarea></div>
-          <button class="btn-primary" type="submit" style="width:100%">Enviar mensagem</button>
-        </form>
+    </section>
+
+    <section class="section alt">
+      <div class="container story-grid">
+        <div class="story-marker"><p class="eyebrow">Nossa história</p><div class="story-year">2004</div><p>Mais de duas décadas edificando no Oriente de São Paulo.</p></div>
+        <div class="story-copy">
+          <p>A Augusta e Respeitável Loja Simbólica União, Harmonia e Fraternidade Nº 3582 reúne homens livres e de bons costumes em torno do estudo, da reflexão e do contínuo aperfeiçoamento moral e intelectual.</p>
+          <p>Nossos trabalhos seguem o Rito Adonhiramita e preservam uma tradição transmitida por gerações, sempre orientada pelo respeito ao próximo e pela dedicação ao bem da humanidade.</p>
+          <a class="button secondary" href="/a-loja/">Saiba mais sobre a Loja</a>
+        </div>
       </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading"><p class="eyebrow">Informações da Loja</p><h2>Identidade institucional</h2></div>
+        <dl class="facts">
+          <div class="fact"><dt>Número</dt><dd>3582</dd></div>
+          <div class="fact"><dt>Rito</dt><dd>Adonhiramita</dd></div>
+          <div class="fact"><dt>Oriente</dt><dd>São Paulo — SP</dd></div>
+          <div class="fact"><dt>Fundação</dt><dd>07 de março de 2004</dd></div>
+          <div class="fact"><dt>Reuniões</dt><dd>Terças-feiras, exceto a última do mês</dd></div>
+          <div class="fact"><dt>Portal interno</dt><dd>Gestão UHF 3582</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="contact-band">
+      <div class="container contact-band-inner">
+        <div><h2>Deseja conhecer a Loja?</h2><p>A Maçonaria não realiza recrutamento. Toda aproximação começa pela iniciativa livre e consciente do interessado.</p></div>
+        <a class="button" href="/contato/">Entrar em contato</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand"><img src="/assets/img/logo-uhf3582.webp" width="58" height="58" alt=""><div><strong>União, Harmonia e Fraternidade · 3582</strong><span>Oriente de São Paulo · Federada ao GOB · Filiada ao GOB-SP</span></div></div>
+      <nav class="footer-links" aria-label="Rodapé"><a href="/a-loja/">A Loja</a><a href="/contato/">Contato</a><a href="/privacidade/">Privacidade</a><a href="https://gestao.uhf3582.com.br/">Portal</a></nav>
     </div>
-  </div>
-  <footer>
-    <div class="footer-logo"><img src="logo.png" alt="logo"/></div>
-    <div class="footer-brand">União, Harmonia e Fraternidade · 3582</div>
-    <div class="footer-sub">Oriente de São Paulo · Federada ao GOB · Fundada em 7 de Março de 2004</div>
-    <div class="footer-ornament"><div class="footer-ornament-line"></div><div class="footer-diamond"></div><div class="footer-ornament-line"></div></div>
-    <div class="footer-copy">© 2026 · Todos os direitos reservados &nbsp;·&nbsp; <a onclick="showPage('politica')" style="color:var(--gold-dim);text-decoration:none;cursor:pointer;font-family:var(--font-d);font-size:12.6px;letter-spacing:0.1em;">Política de Cookies</a></div>
+    <div class="container footer-bottom">© <span data-year>2026</span> Loja UHF 3582. Todos os direitos reservados.</div>
   </footer>
-</div>
-
-
-<!-- POLÍTICA DE COOKIES -->
-<div id="page-politica" class="page">
-  <div class="politica-content">
-    <p class="section-label">Transparência e privacidade</p>
-    <h2>Política de Cookies<br>e Privacidade</h2>
-    <div class="politica-divider"></div>
-    <p class="politica-date">Última atualização: Maio de 2026</p>
-
-    <h3>1. Quem somos</h3>
-    <p>A Loja Maçônica União, Harmonia e Fraternidade Nº 3582, doravante denominada "Loja", é uma associação civil sem fins lucrativos, federada ao Grande Oriente do Brasil (GOB) e filiada ao GOB-SP, com sede na Rua Eduardo Ferreira de França, 364, Cursino, São Paulo – SP, CEP 04157-000.</p>
-    <p>Este site institucional tem como finalidade apresentar a Loja ao público. A área restrita de comunicação interna entre os membros está disponível no portal de gestão, em <a href="https://gestao.uhf3582.com.br/" style="color:var(--gold);">gestao.uhf3582.com.br</a>, que possui política de privacidade própria.</p>
-
-    <h3>2. O que são cookies</h3>
-    <p>Cookies são pequenos arquivos de texto armazenados no seu dispositivo quando você acessa um site. Eles permitem que o site reconheça seu navegador e armazene determinadas informações sobre suas preferências.</p>
-
-    <h3>3. Quais cookies utilizamos</h3>
-    <p>Este site utiliza apenas cookies estritamente necessários para seu funcionamento:</p>
-    <ul>
-      <li><strong style="color:var(--text-primary)">Cookie de preferência de consentimento:</strong> Armazena sua escolha sobre o uso de cookies para não exibirmos o aviso repetidamente.</li>
-    </ul>
-    <p>Não utilizamos cookies de rastreamento, publicidade, análise comportamental ou quaisquer outros cookies não essenciais.</p>
-
-    <h3>4. Base legal (LGPD – Lei nº 13.709/2018)</h3>
-    <p>O tratamento de dados realizado por este site está fundamentado nas seguintes bases legais previstas na Lei Geral de Proteção de Dados Pessoais (LGPD):</p>
-    <ul>
-      <li><strong style="color:var(--text-primary)">Consentimento (Art. 7º, I):</strong> Para o armazenamento de preferências de navegação.</li>
-      <li><strong style="color:var(--text-primary)">Legítimo interesse (Art. 7º, IX):</strong> Para manutenção da segurança e funcionamento da área restrita.</li>
-      <li><strong style="color:var(--text-primary)">Execução de contrato (Art. 7º, V):</strong> Para autenticação e acesso dos membros aos recursos internos da Loja.</li>
-    </ul>
-
-    <h3>5. Dados coletados na área restrita (portal de gestão)</h3>
-    <p>No portal de gestão (gestao.uhf3582.com.br), para membros autenticados, coletamos e armazenamos:</p>
-    <ul>
-      <li>Nome completo</li>
-      <li>Endereço de e-mail</li>
-      <li>CIM (Cadastro de Identificação do Maçom)</li>
-      <li>Perfil de acesso (membro ou administrador)</li>
-    </ul>
-    <p>Esses dados são utilizados exclusivamente para fins de autenticação e comunicação interna da Loja, nunca sendo compartilhados com terceiros.</p>
-
-    <h3>6. Armazenamento e segurança</h3>
-    <p>Os dados são armazenados em plataforma de nuvem que adota padrões internacionais de segurança da informação, incluindo criptografia em trânsito (TLS) e em repouso. O acesso é restrito por regras de segurança configuradas especificamente para este projeto.</p>
-
-    <h3>7. Seus direitos como titular de dados</h3>
-    <p>Nos termos da LGPD, você tem direito a:</p>
-    <ul>
-      <li>Confirmar a existência de tratamento dos seus dados</li>
-      <li>Acessar os dados que mantemos sobre você</li>
-      <li>Corrigir dados incompletos, inexatos ou desatualizados</li>
-      <li>Solicitar a exclusão dos seus dados</li>
-      <li>Revogar o consentimento a qualquer momento</li>
-    </ul>
-    <p>Para exercer seus direitos, entre em contato com o Secretário da Loja através do formulário na página de Contato.</p>
-
-    <h3>8. Retenção de dados</h3>
-    <p>Os dados dos membros são mantidos enquanto durar o vínculo associativo com a Loja. Após o desligamento, os dados serão excluídos em até 90 dias, salvo obrigação legal de retenção.</p>
-
-    <h3>9. Alterações nesta política</h3>
-    <p>Esta política pode ser atualizada periodicamente. Sempre que houver alterações relevantes, os membros serão notificados através do portal de gestão. A data da última atualização estará sempre indicada no topo deste documento.</p>
-
-    <h3>10. Contato</h3>
-    <p>Dúvidas, solicitações ou reclamações relacionadas à privacidade e proteção de dados podem ser encaminhadas ao Secretário da Loja através do formulário disponível na página de Contato deste site.</p>
-  </div>
-
-  <footer>
-    <div class="footer-logo"><img src="logo.png" alt="logo"/></div>
-    <div class="footer-brand">União, Harmonia e Fraternidade · 3582</div>
-    <div class="footer-sub">Oriente de São Paulo · Federada ao GOB · Fundada em 7 de Março de 2004</div>
-    <div class="footer-ornament"><div class="footer-ornament-line"></div><div class="footer-diamond"></div><div class="footer-ornament-line"></div></div>
-    <div class="footer-copy">© 2026 · Todos os direitos reservados</div>
-  </footer>
-</div>
-
-<!-- COOKIE BANNER -->
-<div id="cookie-banner" style="display:none;">
-  <p class="cookie-text">
-    🔒 Este site utiliza apenas cookies estritamente necessários para seu funcionamento, em conformidade com a <strong style="color:var(--text-primary)">LGPD (Lei nº 13.709/2018)</strong>.
-    <a onclick="showPage('politica')">Saiba mais na nossa Política de Cookies.</a>
-  </p>
-  <div class="cookie-actions">
-    <button class="btn-cookie-reject" onclick="rejectCookies()">Apenas essenciais</button>
-    <button class="btn-cookie-accept" onclick="acceptCookies()">Aceitar e continuar</button>
-  </div>
-</div>
-
-  <script>
-    // Cookie consent
-    function checkCookieConsent() {
-      const consent = localStorage.getItem('uhf3582_cookie_consent');
-      if (!consent) {
-        setTimeout(() => {
-          document.getElementById('cookie-banner').style.display = 'flex';
-        }, 1000);
-      }
-    }
-    function acceptCookies() {
-      localStorage.setItem('uhf3582_cookie_consent', 'accepted');
-      document.getElementById('cookie-banner').style.display = 'none';
-    }
-    function rejectCookies() {
-      localStorage.setItem('uhf3582_cookie_consent', 'essential_only');
-      document.getElementById('cookie-banner').style.display = 'none';
-    }
-    window.addEventListener('load', checkCookieConsent);
-  </script>
-
-
-<script>
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active-link'));
-  const page = document.getElementById('page-' + id);
-  if (page) page.classList.add('active');
-  const nav = document.getElementById('nav-' + id);
-  if (nav) nav.classList.add('active-link');
-  window.scrollTo(0, 0);
-}
-if (new URLSearchParams(window.location.search).get('enviado') === '1') {
-  window.addEventListener('load', function() {
-    alert('Mensagem enviada com sucesso! A Loja agradece o seu contato.');
-    history.replaceState(null, '', window.location.pathname);
-  });
-}
-</script>
-
 </body>
 </html>
