@@ -24,6 +24,7 @@ test('a V2 oferece páginas públicas reais com navegação sem handlers inline'
   assert.match(home, /href="\/a-loja\/"/);
   assert.match(home, /href="\/contato\/"/);
   assert.match(home, /href="\/privacidade\/"/);
+  assert.match(home, /href="https:\/\/meta\.gob\.org\.br\/dashboard"/, 'Área dos Irmãos deve apontar para o dashboard do GOB');
   assert.doesNotMatch(home, /\son(?:click|load|submit|change)=/i);
 });
 
